@@ -37,10 +37,10 @@
                 </tr>
                 <tr v-for="(item,index) of dataList" :class="computedClass(index)">
                     <td v-text="index+1"></td>
-                    <td v-text="item.name"></td>
-                    <td v-text="item.author"></td>
-                    <td v-text="item.ISBN"></td>
-                    <td v-text="item.press"></td>
+                    <td v-html="item.name"></td>
+                    <td v-html="item.author"></td>
+                    <td v-html="item.ISBN"></td>
+                    <td v-html="item.press"></td>
                 </tr>
             </table>
         </div>
@@ -61,13 +61,13 @@
                 methods: {
                     get: function() {
                         //发送请求
-                        this.$http.get('./SearchServlet', {
+                        this.$http.get('data.json', {
                             params: this.msg
                         }).then(function(res) {
                             this.dataList = res.body;
                             if (this.dataList.length == 0) {
                                 this.found = false;
-                                this.seen = flase;
+                                this.seen = false;
                                 return;
                             }
                             this.found = true;
