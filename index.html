@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>图书查询系统</title>
+    <script src="./vue.min.js"></script>
+    <script src="./vue-resource.min.js"></script>
+    <link rel="stylesheet" href="./sty.css" charset='utf-8' />
+</head>
+
+<body>
+    <div id="root">
+        <div class="top">
+            <div class="search">
+                <input type="text" v-model="msg.key" placeholder="按回车搜索...." @keyup.enter="searchEnterFun" />
+                <button @click="get()">搜索</button>
+            </div>
+            <!-- <br />
+            <div class="radios">
+                <input type="radio" v-model="msg.mode" value="byName">书名
+                <input type="radio" v-model="msg.mode" value="byWrite">作者
+                <input type="radio" v-model="msg.mode" value="byIsbn">ISBN
+            </div> -->
+        </div>
+        <div class="resultTable">
+            <p v-show="!found">未找到相关信息</p>
+            <table>
+                <tr v-show="seen">
+                    <th></th>
+                    <th>书名</th>
+                    <th>作者</th>
+                    <th>ISBN</th>
+                    <th>Publisher</th>
+                </tr>
+                <tr v-for="(item,index) of dataList" :class="computedClass(index)">
+                    <td v-text="index+1"></td>
+                    <td v-text="item.name"></td>
+                    <td v-text="item.author"></td>
+                    <td v-text="item.ISBN"></td>
+                    <td v-text="item.press"></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <script>
+        {
+            new Vue({
+                el: '#root',
+                data: {
+                    dataList: [],
+                    msg: {
+                        key: '',
+                    },
+                    seen: false,
+                    found: true
+                },
+                methods: {
+                    get: function() {
+                        //发送请求
+                        this.$http.get('./SearchServlet', {
+                            params: this.msg
+                        }).then(function(res) {
+                            this.dataList = res.body;
+                            if (this.dataList.length == 0) {
+                                this.found = false;
+                                this.seen = flase;
+                                return;
+                            }
+                            this.found = true;
+                            this.seen = true;
+                        }, function() {
+                            this.found = false;
+                            console.log('请求失败处理');
+                        });
+                    },
+                    searchEnterFun: function(e) {
+                        var keyCode = window.event ? e.keyCode : e.which;
+                        if (keyCode == 13 && this.msg.key) {
+                            this.get();
+                        }
+                    },
+                    computedClass: function(index) {
+                        if (index % 2 == 0)
+                            return "oddrowcolor";
+                        else
+                            return "evenrowcolor";
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+
+</html>

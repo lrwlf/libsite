@@ -1,0 +1,91 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #494A5F;
+    font-weight: 500;
+    font-family: "Microsoft YaHei", "宋体", "Segoe UI", "Lucida Grande", Helvetica, Arial, sans-serif, FreeSans, Arimo;
+}
+
+input,
+button {
+    border: none;
+    outline: none;
+}
+
+.search,
+.radios {
+    position: relative;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.top {
+    background: #A3D0C3;
+    padding: 30px 0;
+}
+
+.search input {
+    width: 100%;
+    height: 42px;
+    padding-left: 13px;
+    border: 2px solid #7BA7AB;
+    border-radius: 5px;
+    background: #F9F0DA;
+    color: #9E9C9C;
+}
+
+.search button {
+    height: 42px;
+    width: 42px;
+    cursor: pointer;
+    position: absolute;
+    color: white;
+    top: 0;
+    right: 0;
+    background: #7BA7AB;
+    border-radius: 0 5px 5px 0;
+}
+
+table {
+    margin: 0 auto;
+    font-family: verdana, arial, sans-serif;
+    font-size: 11px;
+    color: #000;
+    border-width: 1px;
+    border-color: #a9c6c9;
+    border-collapse: collapse;
+}
+
+table th {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #a9c6c9;
+}
+
+table td {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #a9c6c9;
+}
+
+tr {
+    background-color: #007281;
+}
+
+.oddrowcolor {
+    background-color: #d4e3e5;
+}
+
+.evenrowcolor {
+    background-color: #c3dde0;
+}
+
+p {
+    color: #F9F0DA;
+}
